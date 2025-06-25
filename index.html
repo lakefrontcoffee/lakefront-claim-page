@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claim Your Lakefront Journal</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://www.crossmint.io/sdk/button.bundle.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -38,6 +37,13 @@
     crossmint-pay-button {
       width: 100%;
       height: 60px;
+      display: block;
+    }
+    .fallback-message {
+      color: #a00;
+      margin-top: 1rem;
+      font-size: 1rem;
+      display: none;
     }
     img {
       width: 100%;
@@ -68,8 +74,27 @@
         environment="production"
         mintConfig="{}">
       </crossmint-pay-button>
+      <div id="fallback" class="fallback-message">If the claim button doesn't load, please refresh the page or check your connection.</div>
     </div>
     <img src="https://crossmint.myfilebase.com/ipfs/QmTTGrS1kZNsnj9NKR5YqyTjZ2m4FMLUKE1c3nUD4aRsxg" alt="Lakefront Reserve Journal" />
   </main>
+  <script>
+    const script = document.createElement("script");
+    script.src = "https://www.crossmint.io/sdk/button.bundle.min.js";
+    script.onload = () => {
+      setTimeout(() => {
+        const button = document.querySelector("crossmint-pay-button");
+        if (!button.shadowRoot || button.shadowRoot.innerHTML.trim() === "") {
+          document.getElementById("fallback").style.display = "block";
+          console.error("❌ Crossmint button failed to render.");
+        }
+      }, 3000);
+    };
+    script.onerror = () => {
+      document.getElementById("fallback").style.display = "block";
+      console.error("❌ Crossmint SDK failed to load.");
+    };
+    document.body.appendChild(script);
+  </script>
 </body>
 </html>
