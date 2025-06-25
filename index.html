@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claim Your Lakefront Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://www.crossmint.io/sdk/button.bundle.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom right, #a3c4dc, #fce3c3);
+      color: #2e2e2e;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.75rem;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      font-size: 1.25rem;
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+    }
+    .claim-button-container {
+      margin: 2rem auto;
+      width: 100%;
+      max-width: 480px;
+    }
+    crossmint-pay-button {
+      width: 100%;
+      height: 60px;
+    }
+    img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Welcome to the Lakefront Reserve</h1>
+    <p>Your personalized journal is ready. This limited edition collectible unlocks exclusive rewards, invites, and early access to what’s brewing.</p>
+    <p>Secure yours now — all you need is your email or phone number to get started.</p>
+    <div class="claim-button-container">
+      <crossmint-pay-button
+        projectId="904c4141-82fb-47f7-a227-22c02228529d"
+        collectionId="ea527e44-2015-411e-b8e8-5e7e13eb9325"
+        environment="production"
+        mintConfig="{}">
+      </crossmint-pay-button>
+    </div>
+    <img src="https://crossmint.myfilebase.com/ipfs/QmTTGrS1kZNsnj9NKR5YqyTjZ2m4FMLUKE1c3nUD4aRsxg" alt="Lakefront Reserve Journal" />
+  </main>
+</body>
+</html>
