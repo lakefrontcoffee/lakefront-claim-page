@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claim Your Lakefront Journal</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://www.crossmint.io/sdk/button.bundle.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -62,15 +61,33 @@
     <h1>Welcome to the Lakefront Reserve</h1>
     <p>Your personalized journal is ready. This limited edition collectible unlocks exclusive rewards, invites, and early access to what’s brewing.</p>
     <p>Secure yours now — all you need is your email or phone number to get started.</p>
-    <div class="claim-button-container">
-      <crossmint-pay-button
-        projectId="904c4141-82fb-47f7-a227-22c02228529d"
-        collectionId="ea527e44-2015-411e-b8e8-5e7e13eb9325"
-        environment="production"
-        mintConfig="{}">
-      </crossmint-pay-button>
+    <div class="claim-button-container" id="claim-button-wrapper">
+      <!-- Button will load here -->
     </div>
     <img src="https://crossmint.myfilebase.com/ipfs/QmTTGrS1kZNsnj9NKR5YqyTjZ2m4FMLUKE1c3nUD4aRsxg" alt="Lakefront Reserve Journal" />
   </main>
+
+  <script>
+    const loadCrossmint = () => {
+      const script = document.createElement('script');
+      script.src = "https://www.crossmint.io/sdk/button.bundle.min.js";
+      script.onload = () => {
+        const wrapper = document.getElementById("claim-button-wrapper");
+        const button = document.createElement("crossmint-pay-button");
+        button.setAttribute("projectId", "904c4141-82fb-47f7-a227-22c02228529d");
+        button.setAttribute("collectionId", "ea527e44-2015-411e-b8e8-5e7e13eb9325");
+        button.setAttribute("environment", "production");
+        button.setAttribute("mintConfig", "{}");
+        wrapper.appendChild(button);
+      };
+      script.onerror = () => {
+        const wrapper = document.getElementById("claim-button-wrapper");
+        wrapper.innerHTML = "<p style='color:red;'>Something went wrong loading the claim button. Please refresh the page.</p>";
+      };
+      document.body.appendChild(script);
+    };
+
+    window.addEventListener("DOMContentLoaded", loadCrossmint);
+  </script>
 </body>
 </html>
