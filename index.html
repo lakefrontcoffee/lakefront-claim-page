@@ -81,3 +81,21 @@
   </script>
 </body>
 </html>
+<script src="https://www.crossmint.io/sdk/button.bundle.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('crossmint-container');
+    if (!customElements.get("crossmint-pay-button")) {
+      console.error("Crossmint SDK failed to load.");
+      container.innerHTML = "<p style='color:red;'>Something went wrong. Please refresh the page.</p>";
+      return;
+    }
+
+    const button = document.createElement('crossmint-pay-button');
+    button.setAttribute('projectId', '904c4141-82fb-47f7-a227-22c02228529d');
+    button.setAttribute('collectionId', 'ea527e44-2015-411e-b8e8-5e7e13eb9325');
+    button.setAttribute('environment', 'production');
+    button.setAttribute('mintConfig', '{}');
+    container.appendChild(button);
+  });
+</script>
