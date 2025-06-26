@@ -39,12 +39,6 @@
       height: 60px;
       display: block;
     }
-    .fallback-message {
-      color: #a00;
-      margin-top: 1rem;
-      font-size: 1rem;
-      display: none;
-    }
     img {
       width: 100%;
       max-width: 700px;
@@ -68,33 +62,22 @@
     <p>Your personalized journal is ready. This limited edition collectible unlocks exclusive rewards, invites, and early access to what’s brewing.</p>
     <p>Secure yours now — all you need is your email or phone number to get started.</p>
     <div class="claim-button-container">
-      <crossmint-pay-button
-        projectId="904c4141-82fb-47f7-a227-22c02228529d"
-        collectionId="ea527e44-2015-411e-b8e8-5e7e13eb9325"
-        environment="production"
-        mintConfig="{}">
-      </crossmint-pay-button>
-      <div id="fallback" class="fallback-message">If the claim button doesn't load, please refresh the page or check your connection.</div>
+      <div id="crossmint-container"></div>
     </div>
     <img src="https://crossmint.myfilebase.com/ipfs/QmTTGrS1kZNsnj9NKR5YqyTjZ2m4FMLUKE1c3nUD4aRsxg" alt="Lakefront Reserve Journal" />
   </main>
-  <script>
-    const script = document.createElement("script");
-    script.src = "https://www.crossmint.io/sdk/button.bundle.min.js";
-    script.onload = () => {
-      setTimeout(() => {
-        const button = document.querySelector("crossmint-pay-button");
-        if (!button.shadowRoot || button.shadowRoot.innerHTML.trim() === "") {
-          document.getElementById("fallback").style.display = "block";
-          console.error("❌ Crossmint button failed to render.");
-        }
-      }, 3000);
-    };
-    script.onerror = () => {
-      document.getElementById("fallback").style.display = "block";
-      console.error("❌ Crossmint SDK failed to load.");
-    };
-    document.body.appendChild(script);
+
+  <script type="module">
+    import 'https://www.crossmint.io/sdk/button.bundle.min.js';
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('crossmint-container');
+      const button = document.createElement('crossmint-pay-button');
+      button.setAttribute('projectId', '904c4141-82fb-47f7-a227-22c02228529d');
+      button.setAttribute('collectionId', 'ea527e44-2015-411e-b8e8-5e7e13eb9325');
+      button.setAttribute('environment', 'production');
+      button.setAttribute('mintConfig', '{}');
+      container.appendChild(button);
+    });
   </script>
 </body>
 </html>
