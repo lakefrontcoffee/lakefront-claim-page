@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claim Your Lakefront Journal</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script type="text/javascript" src="https://www.crossmint.io/sdk/button.bundle.min.js"></script>
+  <script src="https://www.crossmint.io/sdk/button.bundle.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -40,6 +40,11 @@
       height: 60px;
       display: block;
     }
+    .fallback-message {
+      display: none;
+      color: red;
+      margin-top: 1rem;
+    }
     img {
       width: 100%;
       max-width: 700px;
@@ -62,7 +67,6 @@
     <h1>Welcome to the Lakefront Reserve</h1>
     <p>Your personalized journal is ready. This limited edition collectible unlocks exclusive rewards, invites, and early access to what’s brewing.</p>
     <p>Secure yours now — all you need is your email or phone number to get started.</p>
-
     <div class="claim-button-container">
       <crossmint-pay-button
         projectId="904c4141-82fb-47f7-a227-22c02228529d"
@@ -70,9 +74,19 @@
         environment="production"
         mintConfig="{}">
       </crossmint-pay-button>
+      <div class="fallback-message" id="fallback">Something went wrong loading the claim button. Please refresh the page.</div>
     </div>
-
     <img src="https://crossmint.myfilebase.com/ipfs/QmTTGrS1kZNsnj9NKR5YqyTjZ2m4FMLUKE1c3nUD4aRsxg" alt="Lakefront Reserve Journal" />
   </main>
+
+  <script>
+    // Show fallback message if the button doesn't render after 3 seconds
+    setTimeout(() => {
+      const button = document.querySelector('crossmint-pay-button');
+      if (!button || !button.shadowRoot) {
+        document.getElementById('fallback').style.display = 'block';
+      }
+    }, 3000);
+  </script>
 </body>
 </html>
