@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lakefront Rewards Access</title>
-  <script async src="https://cdn.jsdelivr.net/npm/@unlock-protocol/unlock-js@latest/dist/unlock.min.js"></script>
+  <script async src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -29,18 +29,6 @@
       margin: 1rem auto;
       max-width: 600px;
     }
-    .unlock-content {
-      display: none;
-      margin-top: 2rem;
-      text-align: left;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .fallback {
-      margin-top: 2rem;
-      font-size: 1.1rem;
-    }
     .cta-button {
       display: inline-block;
       margin-top: 1.5rem;
@@ -58,17 +46,6 @@
   <h1>Welcome to Your Lakefront Reserve Rewards</h1>
   <p>Connect your $BEANS Bag or Journal to unlock your rewards dashboard and start exploring exclusive perks.</p>
 
-  <unlock-protected>
-    <div class="unlock-content">
-      <h2>Your $BEANS Dashboard</h2>
-      <p>You’re verified! Here’s your loyalty information and rewards roadmap.</p>
-      <!-- You can add more gated content here -->
-    </div>
-    <div class="fallback">
-      ❌ You don’t currently hold a Journal or $BEANS. <a href="https://lakefrontcoffee.com/pages/reserve">Grab Your Journal</a> to get started.
-    </div>
-  </unlock-protected>
-
   <script>
     window.unlockProtocolConfig = {
       network: 8453,
@@ -80,8 +57,12 @@
           name: "$BEANS Token"
         }
       },
-      pessimistic: true
+      icon: "https://lakefrontcoffee.com/cdn/shop/files/LFC-LOGO-VERT-100.png?v=1743911454&width=190",
+      callToAction: {
+        default: "Connect your $BEANS Bag or Journal to continue."
+      }
     };
   </script>
+  <script src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js"></script>
 </body>
 </html>
