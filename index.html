@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lakefront Rewards Access</title>
-  <script async src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://sdk.privy.io/v1/privy.js"></script>
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -38,6 +38,7 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -46,23 +47,23 @@
   <h1>Welcome to Your Lakefront Reserve Rewards</h1>
   <p>Connect your $BEANS Bag or Journal to unlock your rewards dashboard and start exploring exclusive perks.</p>
 
+  <!-- Privy Connect Button -->
+  <div id="privy-container"></div>
+
   <script>
-    window.unlockProtocolConfig = {
-      network: 8453,
-      locks: {
-        "0xA55e672549a59BAD61B06C8291f3E857513FA793": {
-          name: "Lakefront Journal NFT"
-        },
-        "0x9D1FeFc037123154A8f4f51CB9fFBad18b67FeF6": {
-          name: "$BEANS Token"
-        }
+    Privy.init({
+      clientId: "cmc01dp1v0041la0mwl2pbr8c",
+      appearance: {
+        theme: "light",
+        accentColor: "#4A321F",
+        showWalletLoginFirst: false
       },
-      icon: "https://lakefrontcoffee.com/cdn/shop/files/LFC-LOGO-VERT-100.png?v=1743911454&width=190",
-      callToAction: {
-        default: "Connect your $BEANS Bag or Journal to continue."
+      embeddedWallets: {
+        createOnLogin: true
       }
-    };
+    });
+    Privy.mount("#privy-container");
   </script>
-  <script src="https://paywall.unlock-protocol.com/static/unlock.latest.min.js"></script>
 </body>
 </html>
+
