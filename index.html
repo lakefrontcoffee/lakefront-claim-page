@@ -4,43 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lakefront Rewards Access</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://sdk.privy.io/v1/privy.js"></script>
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom right, #e8f1ec, #fff5e4);
-      margin: 0;
-      padding: 2rem;
+      font-family: sans-serif;
       text-align: center;
-      color: #333;
-    }
-    img {
-      max-width: 160px;
-      margin: 1rem auto;
-      display: block;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-    }
-    p {
-      font-size: 1.2rem;
-      margin: 1rem auto;
-      max-width: 600px;
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
-  <img src="https://lakefrontcoffee.com/cdn/shop/files/LFC-LOGO-VERT-100.png?v=1743911454&width=190" alt="Lakefront Coffee Logo">
-  <h1>Welcome to Your Lakefront Reserve Rewards</h1>
-  <p>Connect your $BEANS Bag or Journal to unlock your rewards dashboard and start exploring exclusive perks.</p>
-
-  <!-- Privy Connect Button -->
+  <h1>Connect Your Wallet or Email</h1>
   <div id="privy-container"></div>
-
   <script>
-    window.addEventListener('load', () => {
+    window.addEventListener('DOMContentLoaded', () => {
       Privy.init({
         clientId: "cmc01dp1v0041la0mwl2pbr8c",
         appearance: {
