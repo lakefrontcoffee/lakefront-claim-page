@@ -43,6 +43,12 @@
     .section {
       max-width: 800px;
       margin: auto;
+      text-align: center;
+    }
+    .logo {
+      max-width: 180px;
+      margin: 0 auto 2rem;
+      display: block;
     }
     .cta-button {
       display: inline-block;
@@ -66,6 +72,11 @@
       margin-top: 1.5rem;
       color: #1a73e8;
     }
+    .fallback {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #a00;
+    }
     code {
       display: block;
       word-break: break-all;
@@ -86,15 +97,16 @@
 </head>
 <body>
   <div class="section">
+    <img src="https://lakefrontcoffee.com/cdn/shop/files/LFC-LOGO-VERT-100.png?v=1743911454&width=190" alt="Lakefront Coffee Logo" class="logo" />
     <unlock-protected>
-      <div class="section" id="unlock-section">
+      <div id="unlock-section">
         <h1>Introducing $BEANS: Your Lakefront Loyalty Points</h1>
-        <p>$BEANS is our official onchain loyalty point for Lakefront Coffee Reserve — built on the Base network. It rewards our community for showing up, sipping mindfully, and making waves with us both online and IRL.</p>
+        <p>$BEANS is our official reward point for Lakefront Coffee Reserve — built to thank our community for showing up, sipping mindfully, and making waves both online and IRL.</p>
 
         <h2>How to Earn $BEANS</h2>
         <ul>
           <li>🛍️ Every online purchase at <a href="https://lakefrontcoffee.com">lakefrontcoffee.com</a></li>
-          <li>📓 Holding a Lakefront Journal NFT</li>
+          <li>📓 Holding a Lakefront Journal</li>
           <li>🎉 Attending pop-ups, trade shows, and events</li>
           <li>🌊 Participating in Ripple Effect cleanups</li>
           <li>📣 Sharing and engaging on social media</li>
@@ -102,25 +114,25 @@
 
         <h2>What Makes $BEANS Special?</h2>
         <ul>
-          <li>✅ Onchain and transparent — you truly own your points</li>
-          <li>🔐 Used to unlock exclusive coffee drops, merch, and token-gated perks</li>
-          <li>⛽ Built on Base for fast and low-cost rewards</li>
-          <li>🔁 Fully integrated with our digital journal and community experience</li>
+          <li>✅ Transparent and truly yours</li>
+          <li>🔐 Unlock exclusive coffee drops, merch, and experiences</li>
+          <li>⛽ Fast and low-cost rewards</li>
+          <li>🔁 Fully integrated with our journal and community</li>
         </ul>
 
-        <h2>$BEANS Token Roadmap</h2>
+        <h2>$BEANS Roadmap</h2>
         <ul>
-          <li><strong>Q2 2025:</strong> Launch token and distribute to journal holders</li>
-          <li><strong>Q3 2025:</strong> Introduce $BEANS-redeemable discounts and digital redemptions</li>
-          <li><strong>Q4 2025:</strong> Begin testing onchain voting and contribution tracking</li>
-          <li><strong>2026:</strong> Expand to metaverse events, cleanup sponsorships, and collabs</li>
+          <li><strong>Q2 2025:</strong> Launch and distribute to journal holders</li>
+          <li><strong>Q3 2025:</strong> Introduce redeemable discounts and digital rewards</li>
+          <li><strong>Q4 2025:</strong> Begin contribution recognition and community voting</li>
+          <li><strong>2026:</strong> Expand into new experiences and partnerships</li>
         </ul>
 
         <h2>Token Info</h2>
         <ul>
           <li>🔗 <strong>Name:</strong> BEANS</li>
           <li>🧬 <strong>Chain:</strong> Base</li>
-          <li>📝 <strong>Token Type:</strong> ERC-20</li>
+          <li>📝 <strong>Type:</strong> ERC-20</li>
           <li>🏷️ <strong>Supply:</strong> 100,000,000 BEANS</li>
           <li>🔗 <strong>Contract Address:</strong>
             <code>0x9D1FeFc037123154A8f4f51CB9fFBad18b67FeF6</code>
@@ -129,30 +141,32 @@
         </ul>
 
         <p id="balanceDisplay">Loading your $BEANS balance...</p>
-        <a href="/pages/reserve" class="cta-button">Grab Your Lakefront Journal</a>
+        <a href="https://lakefrontcoffee.com/pages/reserve" class="cta-button">Grab Your Lakefront Journal</a>
+      </div>
+      <div class="fallback">
+        ❌ You don’t currently hold a Journal or $BEANS. <a href="https://lakefrontcoffee.com/pages/reserve">Learn more & join here.</a>
       </div>
     </unlock-protected>
   </div>
 
   <script>
-    // Unlock Protocol token gating (LFC Journal NFT holders)
     window.unlockProtocolConfig = {
       network: 8453,
       locks: {
-        "0xA55e672549a59BAD61B06C8291f3E857513FA793": {
-          name: "Lakefront Journal NFT"
-        }
+        "0xA55e672549a59BAD61B06C8291f3E857513FA793": { name: "Lakefront Journal" }
       },
       pessimistic: true
     };
 
-    // Show $BEANS balance using viem
     async function displayBalance() {
       try {
         const { createPublicClient, http } = window.viem;
-        const client = createPublicClient({ chain: { id: 8453, name: 'base' }, transport: http() });
-        const account = window.ethereum.selectedAddress || (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0];
-
+        const client = createPublicClient({
+          chain: { id: 8453, name: "base" },
+          transport: http()
+        });
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
         const balance = await client.readContract({
           address: '0x9D1FeFc037123154A8f4f51CB9fFBad18b67FeF6',
           abi: [
@@ -168,12 +182,10 @@
           functionName: 'balanceOf',
           args: [account]
         });
-
         const formatted = parseFloat(balance) / 1e18;
         document.getElementById('balanceDisplay').textContent = `You have ${formatted.toLocaleString()} $BEANS!`;
       } catch (err) {
         document.getElementById('balanceDisplay').textContent = "Connect your wallet to view your $BEANS balance.";
-        console.error(err);
       }
     }
 
