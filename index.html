@@ -2,19 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lakefront Rewards Access</title>
   <script src="https://sdk.privy.io/v1/privy.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f6f6f6;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Connect Test</h1>
+  <h1>Connect Your Wallet or Email</h1>
   <div id="privy-container"></div>
   <script>
     Privy.init({
-      clientId: "cmc01dp1v0041la0mwl2pbr8c"
+      clientId: "cmc01dp1v0041la0mwl2pbr8c",
+      appearance: {
+        theme: "light",
+        accentColor: "#4A321F"
+      },
+      embeddedWallets: {
+        createOnLogin: true
+      }
     });
     Privy.mount("#privy-container");
   </script>
 </body>
 </html>
-
